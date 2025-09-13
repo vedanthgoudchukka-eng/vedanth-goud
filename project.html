@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intelligent Campus Information System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    /* Chatbot Section */
+    .chatbot {
+      flex: 2;
+      background: #fff;
+      color: #000;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      height: 420px;
+    }
+
+    .chat-box {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #2575fc;
+      border-radius: 8px;
+    }
+
+    .chat-input button {
+      padding: 10px 20px;
+      background: #2575fc;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .chat-input button:hover {
+      background: #6a11cb;
+    }
+
+    /* Sidebar Buttons */
+    .sidebar {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px;
+    }
+
+    .sidebar button {
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .sidebar button:nth-child(1) { background: #ff7e5f; }
+    .sidebar button:nth-child(2) { background: #6a11cb; }
+    .sidebar button:nth-child(3) { background: #2575fc; }
+    .sidebar button:nth-child(4) { background: #28a745; }
+    .sidebar button:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    🎓 Intelligent Campus Information System
+  </header>
+
+  <div class="container">
+    <!-- Chatbot Section -->
+    <div class="chatbot">
+      <div class="chat-box" id="chatBox">
+        <p><b>Referer:</b> Hello! I’m your campus assistant. How can I help you today?</p>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your query...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+
+    <!-- Sidebar Buttons -->
+    <div class="sidebar">
+      <button onclick="addQuery('Dining Services')">🍽 Dining Services</button>
+      <button onclick="addQuery('Library Resources')">📚 Library</button>
+      <button onclick="addQuery('Campus Events')">🎉 Events</button>
+      <button onclick="addQuery('Administrative Procedures')">📝 Administration</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      let input = document.getElementById("userInput");
+      let chatBox = document.getElementById("chatBox");
+      if(input.value.trim() !== ""){
+        chatBox.innerHTML += "<p><b>You:</b> " + input.value + "</p>";
+        chatBox.innerHTML += "<p><b>Referer:</b> Processing your query about " + input.value + "...</p>";
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    function addQuery(query) {
+      let chatBox = document.getElementById("chatBox");
+      chatBox.innerHTML += "<p><b>You:</b> " + query + "</p>";
+
+      let response = "";
+
+      if(query === "Dining Services") {
+        response = "Our dining hall is open from 7:30 AM to 9:00 PM. Today's special is Paneer Butter Masala with Naan. Vegetarian and non-vegetarian counters are available.";
+      }
+      else if(query === "Library Resources") {
+        response = "The Central Library is open from 8:00 AM to 10:00 PM. You can access e-books, journals, and reserve study rooms online using your student ID.";
+      }
+      else if(query === "Campus Events") {
+        response = "Upcoming Events:\n- Freshers' Welcome Party 🎶 (15th Sept, Main Auditorium)\n- Tech Fest ⚙️ (20th Sept, Innovation Hall)\n- Sports Meet 🏆 (25th Sept, Playground)";
+      }
+      else if(query === "Administrative Procedures") {
+        response = "For ID card renewal, visit the Admin Office (Room 102). Fee payment and exam forms are available online via the Student Portal.";
+      }
+      else {
+        response = "Sorry, I don’t have details for that.";
+      }
+
+      chatBox.innerHTML += "<p><b>Referer:</b> " + response + "</p>";
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
